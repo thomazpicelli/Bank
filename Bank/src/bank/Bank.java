@@ -17,7 +17,7 @@ public class Bank {
         accounts = new ArrayList<BankAccount>();
         SavingsAccounts = new ArrayList<SavingsAccount>();
 
-        try {
+        try{
             BufferedReader entrada = new BufferedReader(new FileReader(filename));  //leitura
 
             String numero = entrada.readLine(); 
@@ -33,9 +33,10 @@ public class Bank {
                 else{
                     SavingsAccount b = new SavingsAccount (Integer.parseInt(conta[0]), conta[1], conta[2], Double.parseDouble(conta[3]), Double.parseDouble(conta[4]));
                     SavingsAccounts.set(i, b);
-            }
+                }
+            }    
         }
-        catch(IOException e) {
+        catch(IOException e){
             System.exit(-1);
         }
     }

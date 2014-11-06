@@ -35,6 +35,10 @@ public abstract class BankAccount{
     public String getPassword() {
         return password;
     }
+        
+    public void setSenha(String senha) {
+        this.password = senha;
+    }
 
     public String getOwner() {
         return owner;
@@ -42,10 +46,6 @@ public abstract class BankAccount{
     
     public abstract double getBalance();
     
-    public void setSenha(String senha) {
-        this.password = senha;
-    }
-
     public void deposit(double amount) {
         // Deposita valor na conta bancária
         balance += amount;
