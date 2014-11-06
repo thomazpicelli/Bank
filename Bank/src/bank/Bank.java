@@ -40,7 +40,7 @@ public class Bank {
         }
     }
 
-    public void dump(String filename) {
+    public void dump(String filename){
         try {
             BufferedWriter saida = new BufferedWriter(new FileWriter(filename));
             saida.write(accounts.size() + "\n");
@@ -57,10 +57,10 @@ public class Bank {
     }
 	     
     public void sort(){ //ordenação crescente do saldo
-        for (Bank b : accounts) {
-            Bank a = accounts.get(0);
+        for (BankAccount b : accounts) {
+            BankAccount a = accounts.get(0);
             if(b.getBalance() <= a.getBalance()) {
-                int aux = accounts.get(a);
+                BankAccount aux = accounts.get(a);
                 accounts.set(a, accounts.get(b));
                 accounts.set(b, aux);
             }
@@ -83,14 +83,14 @@ public class Bank {
     public double getTotalBalance(){
          //Calcula o saldo total de todas as contas inseridas no Banco
       double s=0.0;
-      for(int i=0;i<accounts.size;i++)
+      for(int i=0;i<accounts.size();i++)
           s+=accounts.get(i).getBalance();
       return s;    
     }
     
     public BankAccount find(int accountNumber){
          //Devolve a conta vinculada a um número de conta
-        for(int i=0;i<accounts.size;i++)
+        for(int i=0;i<accounts.size();i++)
             if (accounts.get(i).getAccountNumber() == accountNumber)
                 return accounts.get(i);
         return null;
@@ -99,16 +99,16 @@ public class Bank {
     public BankAccount getMaximum(){
          //Devolve a conta com o maior saldo possível
         BankAccount max = accounts.get(0);
-        for(int i=1;i<accounts.size;i++)
+        for(int i=1;i<accounts.size();i++)
             if (accounts.get(i).getBalance()>max.getBalance())
-                accounts.set(i, accounts[i]);
+                accounts.set(i, accounts.get(i));
             return max;
     }
     
     public double count(double limit){
          //Calcula o número de contas com saldo superior ou igual a um limite
         double q=0;
-        for (int i=0;i<accounts.size;i++)
+        for (int i=0;i<accounts.size();i++)
             if (accounts.get(i).getBalance() >= limit)
                 q++;
         return q;
