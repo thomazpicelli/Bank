@@ -2,30 +2,31 @@ package bank;
 
 import java.util.*;
 
-class BankAccount extends Bank{
+public abstract class BankAccount{
     private int accountNumber; // numero da conta
-    private double balance; //Saldo da conta
-    private String name; //Nome 
+    protected double balance; //Saldo da conta
+    private String owner; //Nome 
     private String password; //Senha
   
 
     public BankAccount() {
         this.accountNumber = 0;
         this.balance = 0;
-        this.name = "";  
+        this.owner = "";  
     }
 	
-    public BankAccount(int accountNumber, String password, String name, double balance) {
+    public BankAccount(int accountNumber, String password, String owner, double balance) {
         this.accountNumber = accountNumber;
         this.password = password;
-        this.name = name;
+        this.owner = owner;
         this.balance = balance;
     }
     
-    public BankAccount(double balance, String name) {
+    public BankAccount(double balance, String owner) {
         this.balance = balance;
-        this.name = name;
+        this.owner = owner;
     }
+    
     
     public int getAccountNumber() {
         return accountNumber;
@@ -35,15 +36,24 @@ class BankAccount extends Bank{
         return password;
     }
 
-    public String getName() {
-        return name;
+    public String getOwner() {
+        return owner;
     }
-    public double getBalance() {
-        return this.balance;
-    }
-
+    
+    public abstract double getBalance();
+    
     public void setSenha(String senha) {
         this.password = senha;
+    }
+
+    public void deposit(double amount) {
+        // Deposita valor na conta bancária
+        balance += amount;
+    }
+
+    public void withDraw(double amount) {
+        // Retira valor da conta bancária
+        balance -= amount;
     }
 
     public double yield(double balance) {
@@ -52,17 +62,13 @@ class BankAccount extends Bank{
         return this.balance;
     }
 
-    public void deposit(double amount) {
-        balance+=amount;
-    }
-
     public void draw(double amount) {
         balance-=amount;
     }
     
     public boolean validaName (){
-       for (int k = 0 ; k < name.length() ; k ++ ){
-            if ( Character.isLetter(name.charAt(k)) == false ) {
+       for (int k = 0 ; k < owner.length() ; k ++ ){
+            if ( Character.isLetter(owner.charAt(k)) == false ) {
                 return false;
             }  
        }

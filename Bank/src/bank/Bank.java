@@ -1,3 +1,5 @@
+package bank;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -44,7 +46,7 @@ public class Bank {
             saida.write(accounts.size() + "\n");
 
             for (BankAccount b : accounts) {
-                saida.write(b.getAccountNumber() + "#" + b.getPassword() + "#" + b.getName() + "#" + b.getBalance() + "\n");
+                saida.write(b.getAccountNumber() + "#" + b.getPassword() + "#" + b.getOwner() + "#" + b.getBalance() + "\n");
             }
             saida.flush();
             saida.close();
@@ -72,13 +74,43 @@ public class Bank {
     public ArrayList<SavingsAccount> SavingsAccounts(){
         return SavingsAccounts;  
     }
-}
-
-public class TestaBank{
-    public static void main(String args[]){
-        
-        Bank listaConta = new Bank();
-        listaConta.Bank("entrada.txt");
-        listaConta.dump("saida.txt");
+    
+    public void addAccount(BankAccount a){
+         //Insere conta na classe Bank
+            accounts.add(a);
+    }
+    
+    public double getTotalBalance(){
+         //Calcula o saldo total de todas as contas inseridas no Banco
+      double s=0.0;
+      for(int i=0;i<accounts.size;i++)
+          s+=accounts.get(i).getBalance();
+      return s;    
+    }
+    
+    public BankAccount find(int accountNumber){
+         //Devolve a conta vinculada a um número de conta
+        for(int i=0;i<accounts.size;i++)
+            if (accounts.get(i).getAccountNumber() == accountNumber)
+                return accounts.get(i);
+        return null;
+    }
+    
+    public BankAccount getMaximum(){
+         //Devolve a conta com o maior saldo possível
+        BankAccount max = accounts.get(0);
+        for(int i=1;i<accounts.size;i++)
+            if (accounts.get(i).getBalance()>max.getBalance())
+                accounts.set(i, accounts[i]);
+            return max;
+    }
+    
+    public double count(double limit){
+         //Calcula o número de contas com saldo superior ou igual a um limite
+        double q=0;
+        for (int i=0;i<accounts.size;i++)
+            if (accounts.get(i).getBalance() >= limit)
+                q++;
+        return q;
     }
 }
