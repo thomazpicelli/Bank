@@ -7,10 +7,20 @@ public class Bank {
     
     private ArrayList<BankAccount> accounts;
     private ArrayList<SavingsAccount> SavingsAccounts;
+    private ArrayList<RegularAccount> RegularAccounts;
+    private ArrayList<LawAccount> LawAccounts;
+    private ArrayList<CityLawAccount> CityLawAccounts;
+    private ArrayList<FederationLawAccount> FederationLawAccounts;
+    private ArrayList<StateLawAccount> StateLawAccounts;
 
     public Bank(){
         accounts = new ArrayList<BankAccount>();
         SavingsAccounts = new ArrayList<SavingsAccount>();
+        RegularAccounts = new ArrayList<RegularAccount>();
+        LawAccounts = new ArrayList<LawAccount>();
+        CityLawAccounts = new ArrayList<CityLawAccount>();
+        FederationLawAccounts = new ArrayList<FederationLawAccount>();
+        StateLawAccounts = new ArrayList<StateLawAccount>();
     }
 
     public Bank(String filename){
