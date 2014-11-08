@@ -2,6 +2,7 @@ package bank;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Bank {
     
@@ -26,7 +27,12 @@ public class Bank {
     public Bank(String filename){
         accounts = new ArrayList<BankAccount>();
         SavingsAccounts = new ArrayList<SavingsAccount>();
-
+        RegularAccounts = new ArrayList<RegularAccount>();
+        LawAccounts = new ArrayList<LawAccount>();
+        CityLawAccounts = new ArrayList<CityLawAccount>();
+        FederationLawAccounts = new ArrayList<FederationLawAccount>();
+        StateLawAccounts = new ArrayList<StateLawAccount>();
+    
         try{
             BufferedReader entrada = new BufferedReader(new FileReader(filename));  //leitura
 
@@ -36,13 +42,22 @@ public class Bank {
             for(int i = 0; i<numDeContas; i++) { 
                 String line = entrada.readLine();
                 String conta[] = line.split("#");
-                if (conta[4] == "#"){
-                    BankAccount a = new BankAccount (Integer.parseInt(conta[0]), conta[1], conta[2], Double.parseDouble(conta[3]));
-                    accounts.set(i, a);
-                }
-                else{
-                    SavingsAccount b = new SavingsAccount (Integer.parseInt(conta[0]), conta[1], conta[2], Double.parseDouble(conta[3]), Double.parseDouble(conta[4]));
-                    SavingsAccounts.set(i, b);
+                switch (conta[0]){
+                    case "RA": 
+                        RegularAccounts.add(i,new RegularAccount(Integer.parseInt(conta[1]),conta[2],conta[3],Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
+                        break;
+                    case "SA":
+                        SavingsAccounts.add(i,new SavingsAccount(Integer.parseInt(conta[1]), conta[2], conta[3], Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
+                        break; 
+                    case "CLA":
+                        CityLawAccounts.add(i, new CityLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),conta[5],Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        break;
+                    case "SLA":
+                        StateLawAccounts.add(i, new StateLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),(conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        break;
+                    case "FLA":
+                        FederationLawAccounts.add(i, new FederationLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3],Double.parseDouble(conta[4]), (conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),Integer.parseInt(conta[9])));
+                        break;
                 }
             }    
         }
