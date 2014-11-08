@@ -139,4 +139,24 @@ public class Bank {
                 q++;
         return q;
     }
+    
+    public String getAccount(BankAccount b){
+        if(b instanceof RegularAccount){
+            return "ra";
+        }
+        else if(b instanceof SavingsAccount){
+            return "sa";
+        }
+        else if(b instanceof CityLawAccount){
+            return "cla";
+        }
+        else if(b instanceof StateLawAccount){
+            return "sla";
+        }
+        else if(b instanceof FederationLawAccount){
+		    return "fla";
+        }
+        else 
+            return null;
+    }
 }
