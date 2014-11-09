@@ -7,32 +7,25 @@ import java.util.Date;
 public class Bank {
     
     private ArrayList<BankAccount> accounts;
-    private ArrayList<SavingsAccount> SavingsAccounts;
-    private ArrayList<RegularAccount> RegularAccounts;
-    private ArrayList<LawAccount> LawAccounts;
-    private ArrayList<CityLawAccount> CityLawAccounts;
-    private ArrayList<FederationLawAccount> FederationLawAccounts;
-    private ArrayList<StateLawAccount> StateLawAccounts;
+    //private ArrayList<SavingsAccount> SavingsAccounts;
+    //private ArrayList<RegularAccount> RegularAccounts;
+    //private ArrayList<LawAccount> LawAccounts;
+    //private ArrayList<CityLawAccount> CityLawAccounts;
+    //private ArrayList<FederationLawAccount> FederationLawAccounts;
+    //private ArrayList<StateLawAccount> StateLawAccounts;
 
     public Bank(){
         accounts = new ArrayList<BankAccount>();
-        SavingsAccounts = new ArrayList<SavingsAccount>();
-        RegularAccounts = new ArrayList<RegularAccount>();
-        LawAccounts = new ArrayList<LawAccount>();
-        CityLawAccounts = new ArrayList<CityLawAccount>();
-        FederationLawAccounts = new ArrayList<FederationLawAccount>();
-        StateLawAccounts = new ArrayList<StateLawAccount>();
+        //SavingsAccounts = new ArrayList<SavingsAccount>();
+        //RegularAccounts = new ArrayList<RegularAccount>();
+        //LawAccounts = new ArrayList<LawAccount>();
+        //CityLawAccounts = new ArrayList<CityLawAccount>();
+        //FederationLawAccounts = new ArrayList<FederationLawAccount>();
+        //StateLawAccounts = new ArrayList<StateLawAccount>();
     }
 
     public Bank(String filename){
         accounts = new ArrayList<BankAccount>();
-        SavingsAccounts = new ArrayList<SavingsAccount>();
-        RegularAccounts = new ArrayList<RegularAccount>();
-        LawAccounts = new ArrayList<LawAccount>();
-        CityLawAccounts = new ArrayList<CityLawAccount>();
-        FederationLawAccounts = new ArrayList<FederationLawAccount>();
-        StateLawAccounts = new ArrayList<StateLawAccount>();
-    
         try{
             BufferedReader entrada = new BufferedReader(new FileReader(filename));  //leitura
 
@@ -44,19 +37,19 @@ public class Bank {
                 String conta[] = line.split("#");
                 switch (conta[0]){
                     case "RA": 
-                        RegularAccounts.add(i,new RegularAccount(Integer.parseInt(conta[1]),conta[2],conta[3],Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
+                        accounts.add(i,new RegularAccount(Integer.parseInt(conta[1]),conta[2],conta[3],Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
                         break;
                     case "SA":
-                        SavingsAccounts.add(i,new SavingsAccount(Integer.parseInt(conta[1]), conta[2], conta[3], Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
+                        accounts.add(i,new SavingsAccount(Integer.parseInt(conta[1]), conta[2], conta[3], Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
                         break; 
                     case "CLA":
-                        CityLawAccounts.add(i, new CityLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),conta[5],Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        accounts.add(i, new CityLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),conta[5],Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
                         break;
                     case "SLA":
-                        StateLawAccounts.add(i, new StateLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),(conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        accounts.add(i, new StateLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),(conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
                         break;
                     case "FLA":
-                        FederationLawAccounts.add(i, new FederationLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3],Double.parseDouble(conta[4]), (conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),Integer.parseInt(conta[9])));
+                        accounts.add(i, new FederationLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3],Double.parseDouble(conta[4]), (conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),Integer.parseInt(conta[9])));
                         break;
                 }
             }    
@@ -82,79 +75,134 @@ public class Bank {
         }
     }
 	     
-    public void sort(){ //ordenação crescente do saldo
-        for (BankAccount b : accounts) {
-            BankAccount a = accounts.get(0);
-            if(b.getBalance() <= a.getBalance()) {
-                BankAccount aux = accounts.get(a);
-                accounts.set(a, accounts.get(b));
-                accounts.set(b, aux);
+    public void sort(){ //ordenação por ordem CRESCENTE de saldo
+        for(int i=0; i<accounts.size()-1; i++){
+            for(int j=i; j<accounts.size(); j++){
+                if(accounts.get(j).getBalance() > accounts.get(i).getBalance()){
+                    BankAccount aux = accounts.get(j);
+                    accounts.set(j,accounts.get(i));
+                    accounts.set(i,aux);
+                }
             }
         }
     }
-   
-    public ArrayList<BankAccount> accounts(){
-        return accounts;
+    
+    public ArrayList<RegularAccount> regularAccount(){
+        ArrayList<RegularAccount> RegularAccount = new ArrayList<>();
+        for (int i=0; i<accounts.size(); i++){  //seleciona todas contas regulares
+            if(accounts.get(i) instanceof RegularAccount ){
+                RegularAccount.add((RegularAccount)accounts.get(i));
+            }
+        }
+        for(int i=0; i<RegularAccount.size()-1; i++){  //ordenação DECRESCENTE
+            for(int j=i; j<RegularAccount.size(); j++){
+                if(RegularAccount.get(j).getBalance() < RegularAccount.get(i).getBalance()){
+                    RegularAccount aux=(RegularAccount)RegularAccount.get(j);
+                    RegularAccount.set(j,RegularAccount.get(i));
+                    RegularAccount.set(i,aux);
+                }
+            }
+        }
+        return RegularAccount;
     }
     
-    public ArrayList<SavingsAccount> SavingsAccounts(){
-        return SavingsAccounts;  
+        public ArrayList<SavingsAccount> savingsAccount(){
+        ArrayList<SavingsAccount> SavingsAccount = new ArrayList<>();
+        for (int i=0; i<accounts.size(); i++){  //seleciona todas SavingsAccount
+            if(accounts.get(i) instanceof SavingsAccount ){
+                SavingsAccount.add((SavingsAccount)accounts.get(i));
+            }
+        }
+        for(int i=0; i<SavingsAccount.size()-1; i++){  //ordenação DECRESCENTE
+            for(int j=i; j<SavingsAccount.size(); j++){
+                if(SavingsAccount.get(j).getBalance() < SavingsAccount.get(i).getBalance()){
+                    SavingsAccount aux=(SavingsAccount)SavingsAccount.get(j);
+                    SavingsAccount.set(j,SavingsAccount.get(i));
+                    SavingsAccount.set(i,aux);
+                }
+            }
+        }
+        return SavingsAccount;
     }
-    
-    public void addAccount(BankAccount a){
-         //Insere conta na classe Bank
-            accounts.add(a);
-    }
-    
-    public double getTotalBalance(){
-         //Calcula o saldo total de todas as contas inseridas no Banco
-      double s=0.0;
-      for(int i=0;i<accounts.size();i++)
-          s+=accounts.get(i).getBalance();
-      return s;    
-    }
-    
-    public BankAccount find(int accountNumber){
-         //Devolve a conta vinculada a um número de conta
-        for(int i=0;i<accounts.size();i++)
-            if (accounts.get(i).getAccountNumber() == accountNumber)
-                return accounts.get(i);
-        return null;
-    }
-    
-    public BankAccount getMaximum(){
-         //Devolve a conta com o maior saldo possível
-        BankAccount max = accounts.get(0);
-        for(int i=1;i<accounts.size();i++)
-            if (accounts.get(i).getBalance()>max.getBalance())
-                accounts.set(i, accounts.get(i));
-            return max;
-    }
-    
-    public double count(double limit){
-         //Calcula o número de contas com saldo superior ou igual a um limite
-        double q=0;
-        for (int i=0;i<accounts.size();i++)
-            if (accounts.get(i).getBalance() >= limit)
-                q++;
-        return q;
+        
+    public ArrayList<LawAccount> lawAccount(){
+               
+        ArrayList<CityLawAccount> CityLawAccount = new ArrayList<>(); //seleciona todas as CityLawAccount
+        for (int i=0; i<accounts.size(); i++){
+            if(accounts.get(i) instanceof CityLawAccount ){
+                CityLawAccount.add((CityLawAccount)accounts.get(i));
+            }
+        }
+        for(int i=0; i<CityLawAccount.size()-1; i++){ //ordenaçao CRESCENTE
+            for(int j=i; j<CityLawAccount.size(); j++){
+                if(CityLawAccount.get(j).getBalance()<CityLawAccount.get(i).getBalance()){
+                    CityLawAccount aux = (CityLawAccount)CityLawAccount.get(j);
+                    CityLawAccount.set(j,CityLawAccount.get(i));
+                    CityLawAccount.set(i,aux);
+                }
+            }
+        }
+        
+        ArrayList<StateLawAccount> StateLawAccount = new ArrayList<>();
+        for (int i=0; i<accounts.size(); i++){  //seleciona todas as StateLawAccount
+            if(accounts.get(i) instanceof StateLawAccount ){
+                StateLawAccount.add((StateLawAccount)accounts.get(i));
+            }
+        }
+        for(int i=0; i<StateLawAccount.size()-1; i++){ //ordenação CRESCENTE
+            for(int j=i; j<StateLawAccount.size(); j++){
+                if(StateLawAccount.get(j).getBalance() < StateLawAccount.get(i).getBalance()){
+                    StateLawAccount aux = (StateLawAccount)StateLawAccount.get(j);
+                    StateLawAccount.set(j,StateLawAccount.get(i));
+                    StateLawAccount.set(i,aux);
+                }
+            }
+        }
+        
+        ArrayList<FederationLawAccount> FederationLawAccount = new ArrayList<>();
+        for (int i=0; i<accounts.size(); i++){ // seleciona todas as contas FederationLawAccount
+            if(accounts.get(i) instanceof FederationLawAccount ){
+                FederationLawAccount.add((FederationLawAccount)accounts.get(i));
+            }
+        }
+        for(int i=0; i<FederationLawAccount.size()-1; i++){ //ordenação CRESCENTE
+            for(int j=i; j<FederationLawAccount.size(); j++){
+                if(FederationLawAccount.get(j).getBalance() < FederationLawAccount.get(i).getBalance()){
+                    FederationLawAccount aux = (FederationLawAccount)FederationLawAccount.get(j);
+                    FederationLawAccount.set(j,FederationLawAccount.get(i));
+                    FederationLawAccount.set(i,aux);
+                }
+            }
+        }
+        //devolução de todos ordenados
+        ArrayList<LawAccount> LawAccount = new ArrayList<>();
+        for(int i =0; i<CityLawAccount.size();i++){
+            LawAccount.add(CityLawAccount.get(i));
+        }
+        for(int i =0; i<StateLawAccount.size();i++){
+            LawAccount.add(StateLawAccount.get(i));
+        }
+        for(int i =0; i<FederationLawAccount.size();i++){
+            LawAccount.add(FederationLawAccount.get(i));
+        }
+        return LawAccount;
     }
     
     public String getAccount(BankAccount b){
         if(b instanceof RegularAccount){
-            return "ra";
+            return "RA";
         }
         else if(b instanceof SavingsAccount){
-            return "sa";
+            return "SA";
         }
         else if(b instanceof CityLawAccount){
-            return "cla";
+            return "CLA";
         }
         else if(b instanceof StateLawAccount){
-            return "sla";
+            return "SLA";
         }
         else if(b instanceof FederationLawAccount){
-		    return "fla";
+		return "FLA";
         }
         else 
             return null;
