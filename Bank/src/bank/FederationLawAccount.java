@@ -14,6 +14,14 @@ public class FederationLawAccount
             System.exit(-1);
         this.instance=instance;   
     }
+
+    public FederationLawAccount(int accountNumber, String password, String owner, double balance, 
+                      String aim, double admFee, int instance){
+        super(accountNumber, password,owner,balance,aim,admFee);
+        if (instance >3 || instance<1)
+            System.exit(-1);
+        this.instance=instance;   
+    }    
     
     public int getInstance(){
         return instance;

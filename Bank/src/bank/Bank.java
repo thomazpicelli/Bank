@@ -43,13 +43,13 @@ public class Bank {
                         accounts.add(i,new SavingsAccount(Integer.parseInt(conta[1]), conta[2], conta[3], Double.parseDouble(conta[4]), Double.parseDouble(conta[5])));
                         break; 
                     case "CLA":
-                        accounts.add(i, new CityLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),conta[5],Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        accounts.add(i, new CityLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),conta[5],Double.parseDouble(conta[6]),conta[7]));
                         break;
                     case "SLA":
-                        accounts.add(i, new StateLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),(conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),conta[9]));
+                        accounts.add(i, new StateLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3], Double.parseDouble(conta[4]),(conta[5]),Double.parseDouble(conta[6]),conta[7]));
                         break;
                     case "FLA":
-                        accounts.add(i, new FederationLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3],Double.parseDouble(conta[4]), (conta[5]),Date.parse(conta[6]),Date.parse(conta[7]),Double.parseDouble(conta[8]),Integer.parseInt(conta[9])));
+                        accounts.add(i, new FederationLawAccount(Integer.parseInt(conta[1]),conta[2], conta[3],Double.parseDouble(conta[4]), (conta[5]),Double.parseDouble(conta[6]),Integer.parseInt(conta[7])));
                         break;
                 }
             }    

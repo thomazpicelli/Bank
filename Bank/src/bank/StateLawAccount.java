@@ -15,6 +15,14 @@ public class StateLawAccount
         this.state=state;   
     }
     
+    public StateLawAccount(int accountNumber, String password, String owner, double balance, 
+                      String aim,double admFee, String state){
+        super(accountNumber, password,owner,balance,aim,admFee);
+        if (state.length()!=2)
+            System.exit(-1);
+        this.state=state;   
+    }
+    
     public String getState(){
         return state;
     }

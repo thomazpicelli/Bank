@@ -13,6 +13,12 @@ public class CityLawAccount
         this.city=city;   
     }
     
+    public CityLawAccount(int accountNumber, String password, String owner, double balance, 
+                      String aim, double admFee, String city){
+        super(accountNumber, password,owner,balance,aim,admFee);
+        this.city=city;   
+    }
+    
     public String getCity(){
         return city;
     }
