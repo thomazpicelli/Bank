@@ -1,6 +1,7 @@
 package bank;
 
-public class User implements BankAccountOperation {
+public class User 
+         implements BankAccountOperation {
     
  
     @Override

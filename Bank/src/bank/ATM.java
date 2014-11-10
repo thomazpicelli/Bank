@@ -1,7 +1,8 @@
 
 package bank;
 
-class ATM implements BankAccountOperation {
+class ATM 
+  implements BankAccountOperation {
     private Bank b; // banco vinculado ao caixa eletrônico
     private double fee; // taxa cobrada pela uso do caixa eletrônico
     

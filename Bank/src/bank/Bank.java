@@ -4,7 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Bank {
+public class Bank 
+         implements BankAccountOperation{
     
     private ArrayList<BankAccount> accounts;
     //private ArrayList<SavingsAccount> SavingsAccounts;
@@ -206,5 +207,20 @@ public class Bank {
         }
         else 
             return null;
+    }
+
+    @Override
+    public double getBalance(int accountNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deposit(int accountNumber, double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void withdraw(int accountNumber, double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
