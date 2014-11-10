@@ -13,4 +13,19 @@ class ATM implements BankAccountOperation {
     static double doGetBalance(BankAccountOperation bao,int accountNumber){
         return bao.getBalance(accountNumber);
     }
+
+    @Override
+    public double getBalance(int accountNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deposit(int accountNumber, double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void withdraw(int accountNumber, double value) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
