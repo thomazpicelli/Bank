@@ -1,4 +1,3 @@
-
 package bank;
 
 class ATM 
