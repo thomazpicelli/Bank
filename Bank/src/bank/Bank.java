@@ -8,21 +8,18 @@ public class Bank
          implements BankAccountOperation{
     
     private ArrayList<BankAccount> accounts;
-    //private ArrayList<SavingsAccount> SavingsAccounts;
-    //private ArrayList<RegularAccount> RegularAccounts;
-    //private ArrayList<LawAccount> LawAccounts;
-    //private ArrayList<CityLawAccount> CityLawAccounts;
-    //private ArrayList<FederationLawAccount> FederationLawAccounts;
-    //private ArrayList<StateLawAccount> StateLawAccounts;
+    int identificador;
+    String nomeBanco;
 
     public Bank(){
         accounts = new ArrayList<BankAccount>();
-        //SavingsAccounts = new ArrayList<SavingsAccount>();
-        //RegularAccounts = new ArrayList<RegularAccount>();
-        //LawAccounts = new ArrayList<LawAccount>();
-        //CityLawAccounts = new ArrayList<CityLawAccount>();
-        //FederationLawAccounts = new ArrayList<FederationLawAccount>();
-        //StateLawAccounts = new ArrayList<StateLawAccount>();
+        this.identificador = 000;
+        this.nomeBanco = "";
+    }
+    
+    public Bank(int identificador, String nomeBanco){
+        this.identificador = identificador;
+        this.nomeBanco = nomeBanco;
     }
 
     public Bank(String filename){
@@ -210,17 +207,18 @@ public class Bank
     }
 
     @Override
-    public double getBalance(int accountNumber) {
+    public double getBalance(int accountNumber, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deposit(int accountNumber, double value) {
+    public void deposit(int accountNumber, double value, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void withdraw(int accountNumber, double value) {
+    public void withdraw(int accountNumber, double value, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

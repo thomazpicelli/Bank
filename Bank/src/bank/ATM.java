@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class ATM 
   implements BankAccountOperation {
     
-    private ArrayList<BankAccount> banks;
+    private ArrayList<Bank> banks;
     private Bank b; // banco vinculado ao caixa eletrônico
     private double fee; // taxa cobrada pela uso do caixa eletrônico
     
@@ -20,7 +20,7 @@ class ATM
     }
     
     public ATM(String filename){
-        banks = new ArrayList<BankAccount>();
+        banks = new ArrayList<Bank>();
         try{
             BufferedReader entrada = new BufferedReader(new FileReader(filename));  //leitura
 
@@ -30,7 +30,7 @@ class ATM
             for(int i = 0; i<numDeContas; i++) { 
                 String line = entrada.readLine();
                 String conta[] = line.split("#");
-                banks.add(i,new XXXXX(Integer.parseInt(conta[1]),conta[2]));       
+                banks.add(i,new Bank(Integer.parseInt(conta[1]),conta[2]));       
             }    
         }
         catch(IOException e){
@@ -38,23 +38,18 @@ class ATM
         }
     }
 
-    
-    static double doGetBalance(BankAccountOperation bao,int accountNumber){
-        return bao.getBalance(accountNumber);
-    }
-
     @Override
-    public double getBalance(int accountNumber) {
+    public double getBalance(int accountNumber, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void deposit(int accountNumber, double value) {
+    public void deposit(int accountNumber, double value, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void withdraw(int accountNumber, double value) {
+    public void withdraw(int accountNumber, double value, int identificador) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
