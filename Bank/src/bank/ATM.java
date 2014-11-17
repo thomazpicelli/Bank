@@ -25,7 +25,7 @@ class ATM
             BufferedReader entrada = new BufferedReader(new FileReader(filename));  //leitura
 
             String numero = entrada.readLine(); 
-            int numDeContas = Integer.parseInt(numero);  //conversão de tipo primitivo
+            int numDeContas = Integer.parseInt(numero);
 
             for(int i = 0; i<numDeContas; i++) { 
                 String line = entrada.readLine();
