@@ -1,21 +1,25 @@
 package bank;
 
-public class User 
-         implements BankAccountOperation {
-
-    @Override
-    public double getBalance(int accountNumber, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deposit(int accountNumber, double value, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void withdraw(int accountNumber, double value, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class User{
     
+    
+    public static void doOperation(BankAccountOperation bao,byte type,double value){
+        try{
+            switch(type){
+                case 0:
+                    ((Bank)bao).getBalance(int accountNumber, int identificador);
+                    break;
+                case 1:
+                    ((Bank)bao).deposit(int accountNumber,double value, int identificador);
+                    break;
+                case 2:
+                    ((Bank)bao).withdraw(int accountNumber,double value, int identificador);
+                    break;
+            }
+            throw new IllegalArgumentException("Operação não foi realizada");
+        }
+        catch (IllegalArgumentException e){
+           System.out.println(e.getMessage());   
+        }
+    }
 }

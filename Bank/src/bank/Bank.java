@@ -208,17 +208,48 @@ public class Bank
 
     @Override
     public double getBalance(int accountNumber, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            for (int i=0 ; i<accounts.size()-1 ; i++){
+                if(accounts.get(i).getAccountNumber()== accountNumber)
+                   return accounts.get(i).getBalance();
+            }
+            throw new IllegalArgumentException("Conta não encontrada");
+        } 
+        catch (IllegalArgumentException e){
+           System.out.println(e.getMessage());   
+        }
+        return -1;
     }
 
     @Override
     public void deposit(int accountNumber, double value, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            for (int i=0 ; i<accounts.size()-1 ; i++){
+                if(accounts.get(i).getAccountNumber()== accountNumber)
+                    accounts.get(i).deposit(value);
+            }
+            throw new IllegalArgumentException ("Conta não encontrada");
+        } 
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void withdraw(int accountNumber, double value, int identificador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            if (value>this.getBalance(accountNumber,identificador))
+                throw new IllegalArgumentException ("Saldo insuficiente");
+            else {
+                for (int i=0; i<accounts.size()-1;i++){
+                    if (accounts.get(i).getAccountNumber()==accountNumber)
+                        accounts.get(i).withDraw(value);
+                }
+            }
+            throw new IllegalArgumentException ("Conta não encontrada");
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }    
     }
-    
 }
