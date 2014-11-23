@@ -1,21 +1,21 @@
 package bank;
-
+//Thomaz Picelli e Marcelo Oliveira
 import java.util.*;
 
-public class Agencia extends BankAccount{
+public class Agencia{
     private int numAgencia; //Número da Agencia;
     private String nomeAgencia; //Nome Agencia;
+    private BankAccount conta; //conta vinculada a agencia (Savings, Regular ou Law);
     private ArrayList<Agencia> agencias;
-    
     
     public Agencia(){
         agencias = new ArrayList<Agencia>();
     }
     
-    public Agencia(int numAgencia, String nomeAgencia){
+    public Agencia(int numAgencia, String nomeAgencia, BankAccount conta){
         this.numAgencia = numAgencia;
         this.nomeAgencia = nomeAgencia;
-                
+        this.conta = conta;            
     }
     
     public void inserir(Agencia i){
@@ -41,13 +41,12 @@ public class Agencia extends BankAccount{
     }
     
     public double saldoTotal(Agencia i){
-        double saldoTotal;
+        double saldoTotal = 0.0;
         for (Agencia a: agencias){
             if (i.numAgencia == a.numAgencia){
-                double saldoTotal = saldoTotal + a.getBalance();
+                double saldoTotal = saldoTotal + a.conta.getBalance();
             }
         }
         return saldoTotal;
     }
-    
 }
