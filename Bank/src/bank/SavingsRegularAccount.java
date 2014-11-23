@@ -20,7 +20,7 @@ public class SavingsRegularAccount extends BankAccount{
         return (this.balance/2) + (this.specialBalance);
     }
     
-    public double getBalance(){
+    public String getBalance(){
         double x = BalanceSavings();
         double y = BalanceRegular();
         return System.out.println("Saldo remunerado:" + x + ". Saldo não remunerado:" + y + ".");
