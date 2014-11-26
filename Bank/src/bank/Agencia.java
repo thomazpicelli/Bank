@@ -7,6 +7,7 @@ public class Agencia{
     private String nomeAgencia; //Nome Agencia;
     private BankAccount conta; //conta vinculada a agencia (Savings, Regular ou Law);
     private ArrayList<Agencia> agencias;
+    private BankAccount getConta;
     
     public Agencia(){
         agencias = new ArrayList<Agencia>();
@@ -16,6 +17,10 @@ public class Agencia{
         this.numAgencia = numAgencia;
         this.nomeAgencia = nomeAgencia;
         this.conta = conta;            
+    }
+    
+    public BankAccount getConta(){
+        return this.conta;
     }
     
     public void inserir(Agencia i){
@@ -44,7 +49,8 @@ public class Agencia{
         double saldoTotal = 0.0;
         for (Agencia a: agencias){
             if (i.numAgencia == a.numAgencia){
-                double saldoTotal = saldoTotal + a.conta.getBalance();
+               BankAccount x = a.getConta;
+                double saldoTotal = saldoTotal + x.getBalance();
             }
         }
         return saldoTotal;
