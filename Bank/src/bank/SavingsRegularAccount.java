@@ -25,6 +25,6 @@ public class SavingsRegularAccount extends BankAccount{
     public void depoosit(double value){
         balanceRegular = balanceRegular + value/2;
         balanceSavings = balanceSavings + value/2;
-        balance = value;
+        balance = balance + value;
     }
 }
