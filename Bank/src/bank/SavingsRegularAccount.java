@@ -14,12 +14,12 @@ public class SavingsRegularAccount extends BankAccount{
         this.specialBalance=specialBalance;
     }
    
-    public double getBalanceSavings(){
-        return (balanceSavings/2) * (1 + interestRate);
-    }
-    
-    public double getBalanceRegular(){
-        return (balanceRegular/2) + (specialBalance);
+    public double getBalance(){
+        double aux = (this.balance/2);
+        this.balanceSavings = aux * (1 + interestRate);
+        this.balanceRegular = aux + specialBalance;
+        this.balance = this.balanceSavings + this.balanceRegular;
+        return this.balance;
     }
         
     public void depoosit(double value){
